@@ -1,0 +1,17 @@
+services:
+  expense-tracker:
+    build: .
+    container_name: smart-expense-tracker
+    ports:
+      - "5000:5000"
+    environment:
+      MONTHLY_BUDGET: "20000"
+      # Uncomment to enable S3 backups (also needs AWS credentials or an EC2 IAM role)
+      # S3_BUCKET: "your-bucket-name"
+      # AWS_DEFAULT_REGION: "ap-south-1"
+    volumes:
+      - expense-data:/data
+    restart: unless-stopped
+
+volumes:
+  expense-data:
